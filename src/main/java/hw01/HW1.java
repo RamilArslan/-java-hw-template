@@ -9,7 +9,7 @@ public class HW1 {
         String [][] questions = new String[][]{
                 {"Indi hansi reqem olacaq?", "150"},
                 {"Baki ne vaxt muasir olacaq?", "3030"},
-                {"Familin gunde neche null poineri chixir?", "9000"}
+                {"BU gun ayin necesidir?", "17"}
         };
 
         while (true) {
