@@ -1,5 +1,8 @@
 package hw04;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 class Human {
 
     private String name;
@@ -127,6 +130,28 @@ class Human {
                 ", father=" + father.getName() + "" + father.getSurname() +
                 ", pet=" + (dog==null?"none":dog.toString()) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return dob == human.dob &&
+                IQ == human.IQ &&
+                name.equals(human.name) &&
+                surname.equals(human.surname) &&
+                dog.equals(human.dog) &&
+                mother.equals(human.mother) &&
+                father.equals(human.father) &&
+                Arrays.equals(schedule, human.schedule);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, surname, dob, IQ, dog, mother, father);
+        result = 31 * result + Arrays.hashCode(schedule);
+        return result;
     }
 }
 
