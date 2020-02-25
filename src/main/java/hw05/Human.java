@@ -9,7 +9,7 @@ class Human {
     private String surname;
     private int dob;
     private int IQ;
-    private int[][] schedule;
+    private String[][] schedule;
     private Family family;
 
     public Human() {
@@ -22,7 +22,7 @@ class Human {
         this.dob = dob;
     }
 
-    public Human(String name, String surname, int dob, int IQ, int[][] schedule) {
+    public Human(String name, String surname, int dob, int IQ, String[][] schedule) {
         this.name = name;
         this.surname = surname;
         this.dob = dob;
@@ -70,14 +70,24 @@ class Human {
         this.IQ = IQ;
     }
 
-    public int[][] getSchedule() {
+    public String[][] getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(int[][] schedule) {
+    public void setSchedule(String[][] schedule) {
         this.schedule = schedule;
     }
 
+    private String formSchedule() {
+        StringBuilder schedule = new StringBuilder();
+        int schLen = this.schedule.length;
+        for (int i = 0; i < schLen; i++) {
+            schedule.append(this.schedule[i][0]).append(": ").append(this.schedule[i][1]);
+            if(i!=schLen-1)schedule.append(", ");
+        }
+
+        return schedule.toString();
+    }
     @Override
     public String toString() {
         return "Human{" +
@@ -85,6 +95,7 @@ class Human {
                 ", surname='" + surname + '\'' +
                 ", year=" + dob +
                 ", iq=" + IQ +
+                ", schedule= " + (schedule!=null&& schedule.length >0?formSchedule():"none") +
                 '}';
     }
 
