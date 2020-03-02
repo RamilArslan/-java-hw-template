@@ -2,9 +2,15 @@ package hw05;
 
 public class HW05 {
     public static void main(String[] args) {
+        for (int i = 0; i < 100000; i++) {
+            String[] habits = {"eat", "sleep", "play"};
+
+
+
         Human mother = new Human("Sevil", "Aliyeva", 1964);
         Human father = new Human("Rauf", "Aliyev", 1966);
         Pet succPet = new Pet("Doggie", "Succ barker");
+
         String[][] schedule = new String[7][2];
         schedule[0][0] = "Sunday";
         schedule[0][1] = "do home work.";

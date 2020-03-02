@@ -1,4 +1,4 @@
-package hw05;
+package hw06;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,16 +11,6 @@ class Human {
     private int IQ;
     private String[][] schedule;
     private Family family;
-    public enum DayOfTheWeek {
-        Friday,
-        Monday,
-        Saturday,
-        Sunday,
-        Thursday,
-        Tuesday,
-        Wednesday
-
-    }
 
     public Human() {
     }
@@ -88,26 +78,6 @@ class Human {
         this.schedule = schedule;
     }
 
-    private String formSchedule() {
-        StringBuilder schedule = new StringBuilder();
-        int schLen = this.schedule.length;
-        for (int i = 0; i < schLen; i++) {
-            schedule.append(this.schedule[i][0]).append(": ").append(this.schedule[i][1]);
-            if(i!=schLen-1)schedule.append(", ");
-        }
-
-        return schedule.toString();
-    }
-
-    public Human(String name, String surname, int dob, int IQ, String[][] schedule, Family family) {
-        this.name = name;
-        this.surname = surname;
-        this.dob = dob;
-        this.IQ = IQ;
-        this.schedule = schedule;
-        this.family = family;
-    }
-
     @Override
     public String toString() {
         return "Human{" +
@@ -115,8 +85,17 @@ class Human {
                 ", surname='" + surname + '\'' +
                 ", year=" + dob +
                 ", iq=" + IQ +
-                ", schedule= " + (schedule!=null&& schedule.length >0?formSchedule():"none") +
                 '}';
+    }
+
+    @Override
+    protected void finalize() {
+        System.out.println("Removing " + this.toString());
+        try {
+            super.finalize();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Override
