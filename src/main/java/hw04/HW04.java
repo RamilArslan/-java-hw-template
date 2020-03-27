@@ -2,13 +2,18 @@ package hw04;
 
 public class HW04 {
     public static void main(String[] args) {
-        Human mother = new Human("Sevil", "Aliyeva", 1964);
-        Human father = new Human("Rauf", "Aliyev", 1966);
-        Human grandMother = new Human("Zerife", "Aliyeva", 1915);
+        Pet pet = new Pet("Dog", "Max", 5, 80, new String[]{"eat", "drink", "sleep"});
 
-        Pet doggie = new Pet("Doggie", "BASS");
-        mother.setMother(grandMother);
-        Human child = new Human("Zaur", "Aliyev", 1997, 90, doggie, mother, father,new int[1][1]);
-        System.out.println(child.toString());
+        Human mother = new Human("Nur", "Aliyev", 1970);
+
+        Human father = new Human("Ali", "Aliyev", 1968);
+
+        Human child = new Human("Veli", "Aliyev",
+                1977, 90, pet, mother, father, new String[][]{{"day1", "day2"}, {"task1", "task2"}});
+        child.greetPet();
+        child.describePet();
+
+        System.out.println(pet);
+        System.out.println(child);
     }
 }

@@ -1,157 +1,57 @@
 package hw04;
+public class Human {
+    public String name;
+    public String surname;
+    public int year;
+    public int iq;
+    public Pet pet;
+    public Human mother;
+    public Human father;
+    public String[][] schedule;
 
-import java.util.Arrays;
-import java.util.Objects;
-
-class Human {
-
-    private String name;
-    private String surname;
-    private int dob;
-    private int IQ;
-    private Pet dog;
-    private Human mother;
-    private Human father;
-    private int[][] schedule;
 
     public Human() {
     }
 
-    public Human(String name, String surname, int dob) {
+    public Human(String name, String surname, int year) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
+        this.year = year;
     }
 
-    public Human(String name, String surname, int dob, Human mother, Human father) {
+    public Human(String name, String surname, int year, Human mother, Human father) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
+        this.year = year;
         this.mother = mother;
         this.father = father;
     }
 
-    public Human(String name, String surname, int dob, int IQlevel, Pet pet, Human mother, Human father, int[][] schedule) {
+    public Human(String name, String surname, int year, int iq, Pet pet, Human mother, Human father, String[][] schedule) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
-        this.IQ = IQlevel;
-        this.dog = pet;
+        this.year = year;
+        this.iq = iq;
+        this.pet = pet;
         this.mother = mother;
         this.father = father;
         this.schedule = schedule;
-
     }
 
-    public String getName() {
-        return name;
-    }
-
-
-    public String getSurname() {
-        return surname;
-    }
-
-
-    public int getDob() {
-        return dob;
-    }
-
-    public int getIQlevel() {
-        return IQ;
-    }
-
-
-    public Pet getPet() {
-        return dog;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setDob(int dob) {
-        this.dob = dob;
-    }
-
-    public void setIQ(int IQ) {
-        this.IQ = IQ;
-    }
-
-    public void setDog(Pet dog) {
-        this.dog = dog;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
-    public void setSchedule(int[][] schedule) {
-        this.schedule = schedule;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public int[][] getSchedule() {
-        return schedule;
-    }
 
     public void greetPet() {
-        System.out.println("Hello, " + getPet());
-    }
-    public void describePet() {
-        System.out.println("I have a " + getPet().getSpecies() + ", he is " + getPet().getAge() + " years old, " + " he is " + (getPet().getTrickLevel()>50?"very sly.":"almost not sly."));
+        System.out.printf("Hello, %s.\n", pet.nickname);
     }
 
+    public void describePet() {
+        System.out.printf("I have a %s, he is %d years old, he is %s.\n",
+                pet.species, pet.age, pet.trickLevel > 50 ? "very sly" : "almost not sly");
+    }
 
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", year=" + dob +
-                ", iq=" + IQ +
-                ", mother=" + mother.getName() + " " + mother.getSurname()  +
-                ", father=" + father.getName() + "" + father.getSurname() +
-                ", pet=" + (dog==null?"none":dog.toString()) +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Human human = (Human) o;
-        return dob == human.dob &&
-                IQ == human.IQ &&
-                name.equals(human.name) &&
-                surname.equals(human.surname) &&
-                dog.equals(human.dog) &&
-                mother.equals(human.mother) &&
-                father.equals(human.father) &&
-                Arrays.equals(schedule, human.schedule);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(name, surname, dob, IQ, dog, mother, father);
-        result = 31 * result + Arrays.hashCode(schedule);
-        return result;
+        return String.format("Human{name='%s', surname='%s', year=%d, iq=%d, mother=%s %s, father=%s %s, pet=%s.",
+                name, surname, year, iq, mother.name, mother.surname, father.name, father.surname, pet);
     }
 }
 
