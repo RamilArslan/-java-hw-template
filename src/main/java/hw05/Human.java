@@ -4,49 +4,56 @@ import java.util.Arrays;
 import java.util.Objects;
 
 class Human {
-
     private String name;
     private String surname;
-    private int dob;
-    private int IQ;
-    private String[][] schedule;
+    private int year;
+    private int iq;
     private Family family;
-    public enum DayOfTheWeek {
-        Friday,
-        Monday,
-        Saturday,
-        Sunday,
-        Thursday,
-        Tuesday,
-        Wednesday
+    private String[][] schedule;
 
-    }
 
     public Human() {
     }
 
-
-    public Human(String name, String surname, int dob) {
+    public Human(String name, String surname, int year) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
+        this.year = year;
     }
 
-    public Human(String name, String surname, int dob, int IQ, String[][] schedule) {
+    public Human(String name, String surname, int year, int iq, String[][] schedule, Family family) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
-        this.IQ = IQ;
+        this.year = year;
+        this.iq = iq;
         this.schedule = schedule;
-    }
-
-    public Family getFamily() {
-        return family;
-    }
-
-    public void setFamily(Family family) {
         this.family = family;
     }
+
+
+    public void greetPet() {
+        System.out.printf("Hello, %s.\n", family.getPet().getNickname());
+    }
+
+    public void describePet() {
+        System.out.printf("I have a %s, he is %d years old, he is %s.\n",
+                family.getPet().getSpecies(), family.getPet().getAge(),
+                family.getPet().getTrickLevel() > 50 ? "very sly" : "almost not sly");
+    }
+
+
+
+    private String scheduleToString(String[][] schedule) {
+        if (schedule == null) return "'No task'";
+        else {
+            StringBuilder sb = new StringBuilder();
+            for (String[] row : schedule) {
+                sb.append(Arrays.toString(row)).append(", ");
+            }
+            return sb.toString().substring(0, sb.length() - 2);
+        }
+    }
+
 
     public String getName() {
         return name;
@@ -64,20 +71,20 @@ class Human {
         this.surname = surname;
     }
 
-    public int getDob() {
-        return dob;
+    public int getYear() {
+        return year;
     }
 
-    public void setDob(int dob) {
-        this.dob = dob;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public int getIQ() {
-        return IQ;
+    public int getIq() {
+        return iq;
     }
 
-    public void setIQ(int IQ) {
-        this.IQ = IQ;
+    public void setIq(int iq) {
+        this.iq = iq;
     }
 
     public String[][] getSchedule() {
@@ -88,54 +95,38 @@ class Human {
         this.schedule = schedule;
     }
 
-    private String formSchedule() {
-        StringBuilder schedule = new StringBuilder();
-        int schLen = this.schedule.length;
-        for (int i = 0; i < schLen; i++) {
-            schedule.append(this.schedule[i][0]).append(": ").append(this.schedule[i][1]);
-            if(i!=schLen-1)schedule.append(", ");
-        }
-
-        return schedule.toString();
+    public Family getFamily() {
+        return family;
     }
 
-    public Human(String name, String surname, int dob, int IQ, String[][] schedule, Family family) {
-        this.name = name;
-        this.surname = surname;
-        this.dob = dob;
-        this.IQ = IQ;
-        this.schedule = schedule;
+    public void setFamily(Family family) {
         this.family = family;
     }
 
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", year=" + dob +
-                ", iq=" + IQ +
-                ", schedule= " + (schedule!=null&& schedule.length >0?formSchedule():"none") +
-                '}';
+        return String.format("Human{name='%s', surname='%s', year=%d, iq=%d, schedule=%s}",
+                name, surname, year, iq, scheduleToString(schedule));
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return dob == human.dob &&
-                IQ == human.IQ &&
-                name.equals(human.name) &&
-                surname.equals(human.surname) &&
-                Arrays.equals(schedule, human.schedule);
+        return getYear() == human.getYear() &&
+                getIq() == human.getIq() &&
+                Objects.equals(getName(), human.getName()) &&
+                Objects.equals(getSurname(), human.getSurname()) &&
+                Objects.equals(getFamily(), human.getFamily()) &&
+                Arrays.equals(getSchedule(), human.getSchedule());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, surname, dob, IQ);
-        result = 31 * result + Arrays.hashCode(schedule);
+        int result = Objects.hash(getName(), getSurname(), getYear(), getIq(), getFamily());
+        result = 31 * result + Arrays.hashCode(getSchedule());
         return result;
     }
+
 }
 

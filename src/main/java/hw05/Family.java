@@ -1,56 +1,88 @@
 package hw05;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Family {
 
     private Human mother;
     private Human father;
-    private Human[] children = new Human[0];
+    private Human[] children;
     private Pet pet;
 
-    public Family(Human mother, Human father, Human[] children, Pet pet) {
-        this.mother = mother;
-        this.father = father;
-        this.children = children;
-        this.pet = pet;
+    public Family() {
     }
 
     public Family(Human mother, Human father) {
         this.mother = mother;
         this.father = father;
+        mother.setFamily(this);
+        father.setFamily(this);
+        this.children = new Human[0];
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    // OWN METHODS
+    public void addChild(Human child) {
+        if (children != null) {
+            int indx = children.length;
+            children = Arrays.copyOf(children, indx + 1);
+            children[indx] = child;
+            this.setChildren(children);
+        } else {
+            Human[] children = new Human[1];
+            children[0] = child;
+            this.setChildren(children);
+        }
+        child.setFamily(this);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean deleteChild(int indx) {
+        if (children == null || indx < 0 || indx >= children.length) return false;
+        else {
+            int newArrLen = children.length - 1;
+            Human[] updatedChildrenArray = new Human[newArrLen];
+            for (int i = 0, j = 0; i < newArrLen; i++) {
+                if (i != indx) updatedChildrenArray[j++] = children[i];
+            }
+            this.setChildren(updatedChildrenArray);
+            return true;
+        }
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public boolean deleteChild(Human child) {
+        for (int indx = 0; indx < children.length; indx++) {
+            if (child.equals(children[indx])) {
+                if (this.deleteChild(indx)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
+    public int countFamily() {
+        int countMother = 0;
+        int countFather = 0;
+        int countChildren = 0;
+        if (mother != null) {
+            countMother = 1;
+        }
+        if (father != null) {
+            countFather = 1;
+        }
+        if (children != null) {
+            countChildren = children.length;
+        }
+        return countMother + countFather + countChildren;
     }
 
     @Override
     public String toString() {
-        return "Family{" +
-                "\nmother=" + mother +
-                ",\n father=" + father +
-                ",\n children=" + Arrays.toString(children) +
-                ",\n pet=" + pet +
-                '}';
+        return String.format("Family{father='%s',\nmother='%s',\nchildren='%s',\nPet='%s'}",
+                father, mother, Arrays.toString(children), pet);
     }
 
+    // GETTERS - SETTERS
     public Human getMother() {
         return mother;
     }
@@ -83,31 +115,21 @@ public class Family {
         this.pet = pet;
     }
 
-
-    public void deleteChild(Human child) {
-        Human[] currentChildren = this.children;
-        Human[] newChildren = new Human[currentChildren.length - 1];
-        int newCount = 0;
-        for (Human currentChild : currentChildren) {
-            if (!currentChild.equals(child)) {
-                newChildren[newCount++] = currentChild;
-            }
-        }
-        this.setChildren(newChildren);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(getFather(), family.getFather()) &&
+                Objects.equals(getMother(), family.getMother()) &&
+                Arrays.equals(getChildren(), family.getChildren()) &&
+                Objects.equals(getPet(), family.getPet());
     }
 
-    public void addChild(Human child) {
-        Human[] newChildren = new Human[this.children.length + 1];
-        int newCount = 0;
-        for (Human currentChild : this.children) {
-                newChildren[newCount++] = currentChild;
-        }
-        newChildren[newChildren.length-1] = child;
-        this.setChildren(newChildren);
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getFather(), getMother(), getPet());
+        result = 31 * result + Arrays.hashCode(getChildren());
+        return result;
     }
-
-
-
-
-
 }
