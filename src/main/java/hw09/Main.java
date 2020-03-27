@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
+
   public static void main(String[] args) {
     Pet dog = new Dog("Jim");
     dog.setAge(15);
@@ -69,7 +70,7 @@ public class Main {
 
     familyController.adoptChild(familyBlack, man1);
     familyController.adoptChild(familyBlack, man4);
-    familyController.bornChild(familyBlack, null, "Jane");
+    familyController.bornChild(familyBlack, null, "June");
 
     familyController.adoptChild(familyAliyev, man2);
     familyController.adoptChild(familyAliyev, man6);
@@ -77,7 +78,7 @@ public class Main {
 
     familyController.adoptChild(familyWhite, man3);
     familyController.adoptChild(familyWhite, man5);
-    familyController.bornChild(familyWhite, "Jack", null);
+    familyController.bornChild(familyWhite, "Ali", null);
 
     familyController.saveFamily(familyBlack);
     familyController.saveFamily(familyAliyev);
