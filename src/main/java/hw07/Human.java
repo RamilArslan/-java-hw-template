@@ -1,41 +1,55 @@
 package hw07;
 
-import java.util.Arrays;
+import hw06.Family;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-public abstract class Human {
-
+public class Human {
     private String name;
     private String surname;
-    private int dob;
-    private int IQ;
-    private String[][] schedule;
+    private int year;
+    private int iq;
     private Family family;
+    private Map<DayOfWeek, String> schedule = new HashMap<>();
 
     public Human() {
     }
 
-
-    public Human(String name, String surname, int dob) {
+    public Human(String name, String surname, int year) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
+        this.year = year;
     }
 
-    public Human(String name, String surname, int dob, int IQ, String[][] schedule) {
+    public Human(String name, String surname, int year, Map<DayOfWeek, String> schedule) {
         this.name = name;
         this.surname = surname;
-        this.dob = dob;
-        this.IQ = IQ;
+        this.year = year;
         this.schedule = schedule;
     }
 
-    public Family getFamily() {
-        return family;
+    public Human(String name, String surname, int year, int iq, Map<DayOfWeek, String> schedule, Family family) {
+        this.name = name;
+        this.surname = surname;
+        this.year = year;
+        this.iq = iq;
+        this.schedule = schedule;
+        this.family = family;
     }
 
-    public void setFamily(Family family) {
-        this.family = family;
+    public void greetPet() {
+        System.out.printf("Hello, %s", family.getPet().toString());
+    }
+
+    public void describePet() {
+        if (family == null || family.getPet() == null) System.out.println("There is no any pets.");
+        else {
+            for (Pet pets : family.getPet()) {
+                System.out.printf("I have a %s, he is %d years old, he is %s.\n",
+                        pets.species, pets.getAge(), pets.getTrickLevel() > 50 ? "very sly" : "almost not sly");
+            }
+        }
     }
 
     public String getName() {
@@ -54,68 +68,68 @@ public abstract class Human {
         this.surname = surname;
     }
 
-    public int getDob() {
-        return dob;
+    public int getYear() {
+        return year;
     }
 
-    public void setDob(int dob) {
-        this.dob = dob;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public int getIQ() {
-        return IQ;
+    public int getIq() {
+        return iq;
     }
 
-    public void setIQ(int IQ) {
-        this.IQ = IQ;
+    public void setIq(int iq) {
+        this.iq = iq;
     }
 
-    public String[][] getSchedule() {
+    public Map<DayOfWeek, String> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(Map<DayOfWeek, String> schedule) {
         this.schedule = schedule;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
     }
 
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", year=" + dob +
-                ", iq=" + IQ +
-                '}';
+        return String.format("Human{name='%s', surname='%s', year=%d, iq=%d, schedule=%s}",
+                name, surname, year, iq, schedule.toString());
     }
-
-    @Override
-    protected void finalize() {
-        System.out.println("Removing " + this.toString());
-        try {
-            super.finalize();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return dob == human.dob &&
-                IQ == human.IQ &&
-                name.equals(human.name) &&
-                surname.equals(human.surname) &&
-                Arrays.equals(schedule, human.schedule);
+        return getYear() == human.getYear() &&
+                getIq() == human.getIq() &&
+                Objects.equals(getName(), human.getName()) &&
+                Objects.equals(getSurname(), human.getSurname()) &&
+                Objects.equals(getFamily(), human.getFamily()) &&
+                Objects.equals(getSchedule(), human.getSchedule());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, surname, dob, IQ);
-        result = 31 * result + Arrays.hashCode(schedule);
-        return result;
+        return Objects.hash(getName(), getSurname(), getYear(), getIq(), getFamily(), getSchedule());
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Object of Human class deleted");
+        super.finalize();
+    }
+
+    public void setFamily(hw07.Family family) {
     }
 }
-

@@ -3,36 +3,31 @@ package hw07.pets;
 import hw07.Pet;
 import hw07.Species;
 
+import java.util.Set;
+
 public class Dog extends Pet {
 
-    public Dog() {
+    Dog() {
         super();
-        setSpecies(Species.DOG);
     }
 
-    public Dog(String nickname) {
+    Dog(String nickname) {
         super(nickname);
-        setSpecies(Species.DOG);
+        species = Species.DOG;
     }
 
-    public Dog(String nickname, int age, int trickLevel, String[] habits) {
+    Dog(String nickname, int age, int trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
-        setSpecies(Species.DOG);
-    }
-
-    @Override
-    public void eat() {
-        System.out.println("I like when you spend your money on me)) Succ))");
-    }
-
-    @Override
-    public void foul() {
-        System.out.println("MUUUUUUU!");
+        species = Species.DOG;
     }
 
     @Override
     public void respond() {
-        System.out.println("Hello, owner. I am — " + super.getNickname() + ". Bark!!!!Bark!!Succ!!");
+        System.out.printf("AUUUUUUUU, i am %s\n",getNickname());
     }
 
+    @Override
+    public void foul() {
+        System.out.println("Foul method in Dog class.");
+    }
 }

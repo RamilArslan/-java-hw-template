@@ -4,39 +4,30 @@ package hw07.pets;
 import hw07.Pet;
 import hw07.Species;
 
+import java.util.Set;
+
 public class Fish extends Pet {
-    public Fish() {
+    Fish() {
         super();
-                setSpecies(Species.FISH);
-
     }
 
-    public Fish(String nickname) {
+    Fish(String nickname) {
         super(nickname);
-                setSpecies(Species.FISH);
-
+        species = Species.FISH;
     }
 
-    public Fish(String nickname, int age, int trickLevel, String[] habits) {
+    Fish(String nickname, int age, int trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
-                setSpecies(Species.FISH);
-
+        species = Species.FISH;
     }
 
     @Override
-    public void eat() {
-        System.out.println("Fish eats dried piranha");
+    public void respond() {
+        System.out.printf("I can't respond i am %s\n", getNickname());
     }
 
     @Override
     public void foul() {
         System.out.println("...");
     }
-
-    @Override
-    public void respond() {
-        System.out.println("Hello, owner. I am — " + super.getNickname() + ". I'm not supposed to speak wtf!!!!");
-    }
-
-
 }

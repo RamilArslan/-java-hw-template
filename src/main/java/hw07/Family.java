@@ -1,164 +1,118 @@
 package hw07;
 
-import hw07.person.Man;
-import hw07.person.Woman;
-import hw07.pets.Dog;
-import hw07.pets.DomesticCat;
-import hw07.pets.Fish;
-import hw07.pets.RoboCat;
-
-import java.util.Arrays;
+import java.util.*;
 
 public class Family {
 
-    private Woman mother;
-    private Man father;
-    private Human[] children = new Human[0];
-    private Pet pet;
+    private Human father;
+    private Human mother;
+    private List<Human> children = new ArrayList<>();
+    private Set<Pet> pet = new HashSet<>();
 
-    public Family(Woman mother, Man father, Human[] children, Pet pet) {
+    public Family() {
+    }
+
+    public Family(Human mother, Human father) {
         this.mother = mother;
         this.father = father;
-        this.children = children;
-        this.pet = pet;
+        mother.setFamily(this);
+        father.setFamily(this);
     }
 
-    public Family(Woman mother, Man father) {
-        this.mother = mother;
+    public Family(Human father, Human mother, Pet pet) {
         this.father = father;
+        this.mother = mother;
+        this.pet.add(pet);
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    @Override
-    protected void finalize() {
-        System.out.println("Removing " + this.toString());
-        try {
-            super.finalize();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+    public void addChild(Human child) {
+        if (!children.contains(child)) {
+            children.add(child);
+            child.setFamily(this);
         }
+    }
+
+    public boolean deleteChild(int indx) {
+        if (children == null || indx < 0 || indx >= children.size()) return false;
+        else {
+            children.remove(indx);
+            return true;
+        }
+    }
+
+    public boolean deleteChild(Human child) {
+        if (children.contains(child)) {
+            children.remove(child);
+            return true;
+        }
+        return false;
+    }
+
+    public int countFamily() {
+        int count = 0;
+        if (mother != null) count++;
+        if (father != null) count++;
+        if (children != null) count += children.size();
+        return count;
+    }
+
+    public Human getMother() {
+        return mother;
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
+    public Human getFather() {
+        return father;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+    }
+
+    public List<Human> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Human> children) {
+        this.children = children;
+    }
+
+    public Set<Pet> getPet() {
+        return pet;
+    }
+
+    public void setPet(Set<Pet> pet) {
+        this.pet = pet;
     }
 
     @Override
     public String toString() {
-        return "Family{" +
-                "\nmother=" + mother +
-                ",\n father=" + father +
-                ",\n children=" + Arrays.toString(children) +
-                ",\n pet=" + pet +
-                '}';
+        return String.format("Family{father='%s',\nmother='%s',\nchildren='%s',\nPet='%s'}",
+                father, mother, children.toString(), pet);
     }
 
-    public Woman getMother() {
-        return mother;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(getFather(), family.getFather()) &&
+                Objects.equals(getMother(), family.getMother()) &&
+                Objects.equals(getChildren(), family.getChildren()) &&
+                Objects.equals(getPet(), family.getPet());
     }
 
-    public void setMother(Woman mother) {
-        this.mother = mother;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFather(), getMother(), getChildren(), getPet());
     }
 
-    public Man getFather() {
-        return father;
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("object of family class deleted");
+        super.finalize();
     }
-
-    public void setFather(Man father) {
-        this.father = father;
-    }
-
-    public Human[] getChildren() {
-        return children;
-    }
-
-    public void setChildren(Human[] children) {
-        this.children = children;
-    }
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-
-    public boolean deleteChild(Human child) {
-        Human[] currentChildren = this.children;
-        Human[] newChildren = new Human[currentChildren.length - 1];
-        int newCount = 0;
-        boolean contains = false;
-        for (Human currentChild : currentChildren) {
-            if (!currentChild.equals(child)) {
-                newChildren[newCount++] = currentChild;
-            } else {
-                contains = true;
-            }
-        }
-        if (contains)
-            this.setChildren(newChildren);
-        else {
-            System.out.println("There is no such children");
-        }
-        return contains;
-    }
-
-    public boolean deleteChild(int childIndex) {
-        Human child;
-        try {
-            child = children[childIndex];
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return deleteChild(child);
-    }
-
-    public int countFamily() {
-        return (this.mother != null ? 1 : 0) + (this.father != null ? 1 : 0) + (this.pet != null ? 1 : 0) + this.children.length;
-    }
-
-    public void greetPet() {
-        if(getPet()==null){
-            System.out.println("We have no pet9(((9(((99(((((((((((((((((((((((((((((((((9999((9999=");
-            return;
-        }
-        if (Dog.class.equals(getPet().getClass())) {
-            System.out.println("HELLO, DEAR DOG!0)");
-        } else if (RoboCat.class.equals(getPet().getClass())) {
-            System.out.println("HELLO, DEAR ROBOT CAT!0)");
-        } else if (DomesticCat.class.equals(getPet().getClass())) {
-            System.out.println("HELLO, DEAR DOMESTIC CAT!0)");
-        } else if (Fish.class.equals(getPet().getClass())) {
-            System.out.println("HELLO, DEAR FISH!0)");
-        } else {
-            System.out.println("succ");
-        }
-    }
-
-
-    public void addChild(Human child) {
-        Human[] newChildren = new Human[this.children.length + 1];
-        int newCount = 0;
-        for (Human currentChild : this.children) {
-            newChildren[newCount++] = currentChild;
-        }
-        newChildren[newChildren.length - 1] = child;
-        this.setChildren(newChildren);
-    }
-
-
 }

@@ -1,5 +1,5 @@
 package hw07;
 
 public enum Species {
-    CAT, DOG, FISH, PIG, UNKNOWN
+    FISH, ROBOCAT, DOG, DOMESTICCAT, UNKNOWN
 }

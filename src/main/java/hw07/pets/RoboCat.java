@@ -3,37 +3,31 @@ package hw07.pets;
 import hw07.Pet;
 import hw07.Species;
 
+import java.util.Set;
+
 public class RoboCat extends Pet {
-    public RoboCat() {
+    RoboCat() {
         super();
-                setSpecies(Species.UNKNOWN);
-
     }
 
-    public RoboCat(String nickname) {
+    RoboCat(String nickname) {
         super(nickname);
-                setSpecies(Species.UNKNOWN);
+        species = Species.ROBOCAT;
 
     }
 
-    public RoboCat(String nickname, int age, int trickLevel, String[] habits) {
+    RoboCat(String nickname, int age, int trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
-                setSpecies(Species.UNKNOWN);
-
+        species = Species.ROBOCAT;
     }
 
     @Override
-    public void eat() {
-        System.out.println("Robot cat wants to it but it can't");
+    public void respond() {
+        System.out.println("I am a little robot.");
     }
 
     @Override
     public void foul() {
-        System.out.println("Miau))))))))");
+        System.out.println("şşşşşşşşş");
     }
-    @Override
-    public void respond() {
-        System.out.println("Hello, owner. I am — " + super.getNickname() + ". I am a fuckin' robot! !!!!");
-    }
-
 }

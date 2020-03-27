@@ -1,28 +1,37 @@
 package hw07;
-
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public abstract class Pet {
-    private Species species;
-    private String nickname ;
+    protected Species species = Species.UNKNOWN;
+    private String nickname;
     private int age;
     private int trickLevel;
-    private String [] habits;
+    private Set<String> habits = new HashSet<>();
+
 
     public Pet() {
     }
+
     public Pet(String nickname) {
         this.nickname = nickname;
     }
 
-    public Pet(String nickname, int age, int trickLevel, String[] habits) {
+    public Pet(String nickname, int age, int trickLevel, Set<String> habits) {
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
         this.habits = habits;
     }
 
+    public void eat() {
+        System.out.println("I am eating.\n");
+    }
+
+    public abstract void respond();
+
+    public abstract void foul();
 
     public Species getSpecies() {
         return species;
@@ -56,44 +65,18 @@ public abstract class Pet {
         this.trickLevel = trickLevel;
     }
 
-    public String[] getHabits() {
+    public Set<String> getHabits() {
         return habits;
     }
 
-    public void setHabits(String[] habits) {
+    public void setHabits(Set<String> habits) {
         this.habits = habits;
     }
 
     @Override
-    protected void finalize() {
-        System.out.println("Removing " + this.toString());
-        try {
-            super.finalize();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
-
-    public void eat() {
-        System.out.println("I am eating");
-    }
-    public void respond() {
-        System.out.println("Hello, owner. I am — " + nickname + ". I miss you!");
-    }
-    public void foul() {
-        System.out.println("I need to cover it up");
-    }
-
-    @Override
     public String toString() {
-        return "Pet{" +
-                "species='" + species + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", age=" + age +
-                ", trickLevel=" + trickLevel +
-                ", habits=" + (habits==null?"none":Arrays.toString(habits)) +
-                '}';
+        return String.format("%s{nickname='%s', age=%d, trickLevel=%d, habits=%s}",
+                species, nickname, age, trickLevel, habits.toString());
     }
 
     @Override
@@ -101,18 +84,22 @@ public abstract class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return age == pet.age &&
-                trickLevel == pet.trickLevel &&
-                species.equals(pet.species) &&
-                nickname.equals(pet.nickname) &&
-                Arrays.equals(habits, pet.habits);
+        return getAge() == pet.getAge() &&
+                getTrickLevel() == pet.getTrickLevel() &&
+                getSpecies() == pet.getSpecies() &&
+                Objects.equals(getNickname(), pet.getNickname()) &&
+                Objects.equals(getHabits(), pet.getHabits());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(species, nickname, age, trickLevel);
-        result = 31 * result + Arrays.hashCode(habits);
-        return result;
+        return Objects.hash(getSpecies(), getNickname(), getAge(), getTrickLevel(), getHabits());
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Object of Pet class deleted");
+        super.finalize();
     }
 }
 
