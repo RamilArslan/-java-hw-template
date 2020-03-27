@@ -33,56 +33,56 @@ public class Main {
     cat.setHabits(habitsOfCat);
 
     // Kari family
-    Woman motherKari = new Woman("Maria", "Kari", "1976/03/25");
-    motherKari.setIq(65);
-    Man fatherKari = new Man("Pier", "Kari", "1970/04/02");
-    fatherKari.setIq(75);
-    Family familyKari = new Family(fatherKari, motherKari);
+    Woman motherBlack = new Woman("June", "Black", "1976/03/25");
+    motherBlack.setIq(65);
+    Man fatherBlack = new Man("Alex", "Black", "1970/04/02");
+    fatherBlack.setIq(75);
+    Family familyBlack = new Family(fatherBlack, motherBlack);
 
     // Imeno family
-    Man fatherImeno = new Man("Peter", "Imeno", "1981/02/10");
-    fatherImeno.setIq(75);
-    Woman motherImeno = new Woman("Kate", "Imeno", "1983/01/20");
-    motherImeno.setIq(65);
-    Family familyImeno = new Family(fatherImeno, motherImeno);
+    Man fatherAliyev = new Man("Ali", "Aliyev", "1981/02/10");
+    fatherAliyev.setIq(75);
+    Woman motherAliyev = new Woman("Nur", "Aliyev", "1983/01/20");
+    motherAliyev.setIq(65);
+    Family familyAliyev = new Family(fatherAliyev, motherAliyev);
 
     //family Watson
-    Man fatherWatson = new Man("John", "Watson", "1980/05/12");
-    fatherWatson.setIq(75);
-    Woman motherWatson = new Woman("Dila", "Watson", "1985/06/14");
-    motherWatson.setIq(65);
-    Family familyWatson = new Family(fatherWatson, motherWatson);
+    Man fatherWhite = new Man("Piter", "White", "1980/05/12");
+    fatherWhite.setIq(75);
+    Woman motherWhite = new Woman("Yana", "White", "1985/06/14");
+    motherWhite.setIq(65);
+    Family familyWhite = new Family(fatherWhite, motherWhite);
 
     FamilyController familyController = new FamilyController();
 
-    Man man1 = new Man("1111", "1111", "1999/01/01");
-    Man man2 = new Man("2222", "2222", "1998/02/02");
-    Man man3 = new Man("3333", "3333", "1997/03/03");
-    Man man4 = new Man("4444", "4444", "1996/04/04");
+    Man man1 = new Man("1111", "1111", "1991/01/01");
+    Man man2 = new Man("2222", "2222", "1992/02/02");
+    Man man3 = new Man("3333", "3333", "1993/03/03");
+    Man man4 = new Man("4444", "4444", "1994/04/04");
     Man man5 = new Man("5555", "5555", "1995/05/05");
-    Man man6 = new Man("6666", "6666", "2008/06/19");
-    Man man7 = new Man("7777", "7777", "2005/10/22");
-    Man man8 = new Man("8888", "8888", "2010/12/29");
+    Man man6 = new Man("6666", "6666", "1996/06/06");
+    Man man7 = new Man("7777", "7777", "1997/07/07");
+    Man man8 = new Man("8888", "8888", "1998/08/08");
 
     Man man = new Man("AAA", "BBB", "2000/07/18");
     Woman woman = new Woman("DDD", "FFF", "2001/09/15");
     familyController.createNewFamily(man,woman);
 
-    familyController.adoptChild(familyKari, man1);
-    familyController.adoptChild(familyKari, man4);
-    familyController.bornChild(familyKari, null, "Jane");
+    familyController.adoptChild(familyBlack, man1);
+    familyController.adoptChild(familyBlack, man4);
+    familyController.bornChild(familyBlack, null, "June");
 
-    familyController.adoptChild(familyImeno, man2);
-    familyController.adoptChild(familyImeno, man6);
-    familyController.adoptChild(familyImeno, man7);
+    familyController.adoptChild(familyAliyev, man2);
+    familyController.adoptChild(familyAliyev, man6);
+    familyController.adoptChild(familyAliyev, man7);
 
-    familyController.adoptChild(familyWatson, man3);
-    familyController.adoptChild(familyWatson, man5);
-    familyController.bornChild(familyWatson, "Jack", null);
+    familyController.adoptChild(familyWhite, man3);
+    familyController.adoptChild(familyWhite, man5);
+    familyController.bornChild(familyWhite, "Ali", null);
 
-    familyController.saveFamily(familyKari);
-    familyController.saveFamily(familyImeno);
-    familyController.saveFamily(familyWatson);
+    familyController.saveFamily(familyBlack);
+    familyController.saveFamily(familyAliyev);
+    familyController.saveFamily(familyWhite);
 
     familyController.addPet(2, dog);
     familyController.addPet(3, cat);
@@ -95,7 +95,7 @@ public class Main {
     familyController.getFamiliesLessThan(5);
     familyController.countFamiliesWithMemberNumber(4);
     familyController.deleteFamilyByIndex(1);
-    familyController.deleteFamily(familyKari);
+    familyController.deleteFamily(familyBlack);
     familyController.deleteAllChildrenOlderThen(17);
     familyController.displayAllFamilies();
     familyController.getPets(1);
