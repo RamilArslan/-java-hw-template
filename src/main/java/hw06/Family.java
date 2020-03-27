@@ -2,7 +2,7 @@ package hw06;
 
 import java.util.Arrays;
 import java.util.Objects;
-
+import hw11.entity.pet.Pet;
 public class Family {
 
     private Human mother;
@@ -26,6 +26,12 @@ public class Family {
         this.mother = mother;
         this.pet = pet;
     }
+
+    public Family(Human father, Human mother, hw06.Pet pet) {
+    }
+
+//    public Family(Human father, Human mother, hw11.hw06.Pet pet) {
+//    }
 
     public void addChild(Human child) {
         if (children != null) {
@@ -139,7 +145,7 @@ public class Family {
     }
 
     @Override
-    protected void finalize() throws Throwable {
+    public void finalize() throws Throwable {
         System.out.println("object of family class deleted");
         super.finalize();
     }

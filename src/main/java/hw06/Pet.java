@@ -1,9 +1,7 @@
 package hw06;
 
-
 import java.util.Arrays;
 import java.util.Objects;
-
 class Pet {
     private Species species;
     private String nickname ;
@@ -11,37 +9,6 @@ class Pet {
     private int trickLevel;
     private String [] habits;
 
-    public Pet() {
-
-    }
-
-    public Pet(Species species, String nickname) {
-        this.species = species;
-        this.nickname = nickname;
-    }
-
-    public Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
-        this.species = species;
-        this.nickname = nickname;
-        this.age = age;
-        this.trickLevel = trickLevel;
-        this.habits = habits;
-    }
-
-    // OWN METHODS
-    public void eat() {
-        System.out.println("I am eating.\n");
-    }
-
-    public void respond() {
-        System.out.printf("Hello, owner. I am %s. I miss you!\n", nickname);
-    }
-
-    public void foul() {
-        System.out.println("I need to cover it up.\n");
-    }
-
-    // GETTER - SETTERS
     public Species getSpecies() {
         return species;
     }
@@ -81,6 +48,35 @@ class Pet {
     public void setHabits(String[] habits) {
         this.habits = habits;
     }
+
+    public Pet() {
+
+    }
+    public Pet(Species species, String nickname) {
+        this.species = species;
+        this.nickname = nickname;
+    }
+
+    public Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
+        this.species = species;
+        this.nickname = nickname;
+        this.age = age;
+        this.trickLevel = trickLevel;
+        this.habits = habits;
+    }
+
+    public void eat() {
+        System.out.println("I am eating.\n");
+    }
+
+    public void respond() {
+        System.out.printf("Hello, owner. I am %s. I miss you!\n", nickname);
+    }
+
+    public void foul() {
+        System.out.println("I need to cover it up.\n");
+    }
+
 
     @Override
     public String toString() {

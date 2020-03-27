@@ -141,7 +141,7 @@ public class Human {
     }
 
     @Override
-    protected void finalize() throws Throwable {
+    public void finalize() throws Throwable {
         System.out.println("Object of Human class deleted");
         super.finalize();
     }

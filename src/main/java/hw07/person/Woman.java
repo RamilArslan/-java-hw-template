@@ -1,7 +1,7 @@
 package hw07.person;
 
 import hw07.DayOfWeek;
-import hw07.Family;
+import hw06.Family;
 import hw07.Human;
 
 import java.util.Map;
@@ -15,7 +15,7 @@ public class Woman extends Human {
         super(name, surname, year);
     }
 
-    Woman(String name, String surname, int year, Map<DayOfWeek, String> schedule) {
+    public Woman(String name, String surname, int year, Map<DayOfWeek, String> schedule) {
         super(name, surname, year, schedule);
     }
 

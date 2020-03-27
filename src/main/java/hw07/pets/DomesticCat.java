@@ -15,7 +15,7 @@ public class DomesticCat extends Pet {
         species = Species.DOMESTICCAT;
     }
 
-    DomesticCat(String nickname, int age, int trickLevel, Set<String> habits) {
+    public DomesticCat(String nickname, int age, int trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
         species = Species.DOMESTICCAT;
     }

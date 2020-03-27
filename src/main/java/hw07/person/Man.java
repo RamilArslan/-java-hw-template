@@ -1,7 +1,10 @@
 package hw07.person;
 
-import hw07.Family;
+import hw06.Family;
+import hw07.DayOfWeek;
 import hw07.Human;
+
+import java.util.Map;
 
 public class Man extends Human {
     Man() {
@@ -12,11 +15,11 @@ public class Man extends Human {
         super(name, surname, year);
     }
 
-    Man(String name, String surname, int year, int iq, Family family, String[][] schedule) {
+    Man(String name, String surname, int year, int iq, Family family, Map<DayOfWeek , String> schedule) {
         super(name, surname, year, iq, schedule, family);
     }
 
-    public Man(String name, String surname, int year, String[][] schedule) {
+    public Man(String name, String surname, int year, Map<DayOfWeek , String>schedule) {
         super(name, surname, year, schedule);
     }
 

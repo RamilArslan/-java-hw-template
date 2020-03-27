@@ -39,17 +39,13 @@ public class Human {
     }
 
     public void greetPet() {
-        System.out.printf("Hello, %s", family.getPet().toString());
+        System.out.printf("Hello, %s\n", family.getPet().getNickname());
     }
 
     public void describePet() {
-        if (family == null || family.getPet() == null) System.out.println("There is no any pets.");
-        else {
-            for (Pet pets : family.getPet()) {
-                System.out.printf("I have a %s, he is %d years old, he is %s.\n",
-                        pets.species, pets.getAge(), pets.getTrickLevel() > 50 ? "very sly" : "almost not sly");
-            }
-        }
+        System.out.printf("I have a %s, he is %d years old, he is %s.\n",
+                family.getPet().getSpecies(), family.getPet().getAge(),
+                family.getPet().getTrickLevel() > 50 ? "very sly" : "almost not sly");
     }
 
     public String getName() {

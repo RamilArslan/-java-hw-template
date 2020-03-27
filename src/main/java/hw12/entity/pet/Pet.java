@@ -1,9 +1,8 @@
-package hw11.entity.pet;
+package hw12.entity.pet;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 
 public abstract class Pet {
   protected Species species = Species.UNKNOWN;
@@ -33,7 +32,6 @@ public abstract class Pet {
   public abstract void respond();
 
   public abstract void foul();
-
 
   public Species getSpecies() {
     return species;
