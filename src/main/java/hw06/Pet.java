@@ -1,5 +1,6 @@
 package hw06;
 
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -11,7 +12,9 @@ class Pet {
     private String [] habits;
 
     public Pet() {
+
     }
+
     public Pet(Species species, String nickname) {
         this.species = species;
         this.nickname = nickname;
@@ -25,7 +28,20 @@ class Pet {
         this.habits = habits;
     }
 
+    // OWN METHODS
+    public void eat() {
+        System.out.println("I am eating.\n");
+    }
 
+    public void respond() {
+        System.out.printf("Hello, owner. I am %s. I miss you!\n", nickname);
+    }
+
+    public void foul() {
+        System.out.println("I need to cover it up.\n");
+    }
+
+    // GETTER - SETTERS
     public Species getSpecies() {
         return species;
     }
@@ -67,35 +83,9 @@ class Pet {
     }
 
     @Override
-    protected void finalize() {
-        System.out.println("Removing " + this.toString());
-        try {
-            super.finalize();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
-
-    public void eat() {
-        System.out.println("I am eating");
-    }
-    public void respond() {
-        System.out.println("Hello, owner. I am — " + nickname + ". I miss you!");
-    }
-    public void foul() {
-        System.out.println("I need to cover it up");
-    }
-
-    @Override
     public String toString() {
-        return "Pet{" +
-                "species='" + species + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", age=" + age +
-                ", trickLevel=" + trickLevel +
-                ", habits=" + (habits==null?"none":Arrays.toString(habits)) +
-                '}';
+        return String.format("%s{nickname='%s', age=%d, trickLevel=%d, habits=%s}",
+                species, nickname, age, trickLevel, Arrays.toString(habits));
     }
 
     @Override
@@ -103,18 +93,24 @@ class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return age == pet.age &&
-                trickLevel == pet.trickLevel &&
-                species.equals(pet.species) &&
-                nickname.equals(pet.nickname) &&
-                Arrays.equals(habits, pet.habits);
+        return getAge() == pet.getAge() &&
+                getTrickLevel() == pet.getTrickLevel() &&
+                Objects.equals(getSpecies(), pet.getSpecies()) &&
+                Objects.equals(getNickname(), pet.getNickname()) &&
+                Arrays.equals(getHabits(), pet.getHabits());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(species, nickname, age, trickLevel);
-        result = 31 * result + Arrays.hashCode(habits);
+        int result = Objects.hash(getSpecies(), getNickname(), getAge(), getTrickLevel());
+        result = 31 * result + Arrays.hashCode(getHabits());
         return result;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Object of Pet class deleted");
+        super.finalize();
     }
 }
 

@@ -1,5 +1,5 @@
 package hw06;
 
 public enum Species {
-    CAT, DOG, FISH, PIG, OTHER
+    CAT, DOG, FISH, PIG
 }
