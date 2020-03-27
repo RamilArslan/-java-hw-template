@@ -42,9 +42,7 @@ public class HW1 {
                     continue;
                 }
                 int[] tempArr = new int[counter + 1];
-                for (int i = 0; i < array.length; i++) {
-                    tempArr[i] = array[i];
-                }
+                System.arraycopy(array, 0, tempArr, 0, array.length);
                 array = tempArr;
 
 
@@ -70,6 +68,7 @@ public class HW1 {
             counter = 0;
 
             if (guess == -1) break;
+
 
         }
     }
